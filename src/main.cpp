@@ -1,42 +1,21 @@
 ﻿#include "APeregrinatorsTale.h"
+#include "MenuManager.h"
 
 #include <functional>	// for functionn
 #include <memory>		// for make_shared & shared_ptr
 #include <utility>		// for forward
-
-#include <ftxui/util/warn_windows_macro.hpp>
-#include "ftxui/component/component_base.hpp" // for Component & Components
-#include "ftxui/component/component_options.hpp"  // for ButtonOption, CheckboxOption & MenuOption
-#include "ftxui/dom/elements.hpp" // for Element
-#include "ftxui/util/ref.hpp"  // for ConstRef, Ref, ConstStringRef, ConstStringListRef & StringRef
-
 #include <iostream>
-#include <algorithm>
 
-#define NOMINMAX
-#define WINDOWS32_LEAN_AND_MEAN
-#include <Windows.h>
+#include "ftxui/component/component.hpp" // for Components (Menu)
+#include "ftxui/component/component_options.hpp"  // for ButtonOption, CheckboxOption & MenuOption
+#include "ftxui/component/screen_interactive.hpp" // for Element
 
-using namespace std;
 
 int main()
 {
+	using namespace ftxui;
 
-	// display_main_menu()
-
-	
-
-
-
-
-
-
-
-
-
-	auto screen = Screen::Create(Dimension::Full(), Dimension::Fit(document));
-	Render(screen, document);
-	screen.Print();
+	display_main_menu();
 
 	return 0;
 
