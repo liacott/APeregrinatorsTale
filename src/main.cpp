@@ -14,8 +14,7 @@
 int main()
 {
 	using namespace ftxui;
-
-	display_main_menu();
+	
 
 	return 0;
 
