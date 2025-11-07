@@ -14,7 +14,14 @@
 int main()
 {
 	using namespace ftxui;
-	
+
+	// If player finishes character creation, game world initializes
+	bool load_game = startup_menu_flow();
+
+	if (!load_game) 
+	{
+		return 0;
+	}
 
 	return 0;
 

@@ -6,7 +6,7 @@
 #include "ftxui/component/screen_interactive.hpp"
 
 // Display main menu and return user selection
-std::string display_main_menu()
+std::string main_menu()
 {
 	auto screen = ftxui::ScreenInteractive::TerminalOutput();
 	screen.Clear();
@@ -15,7 +15,7 @@ std::string display_main_menu()
 	
 	// Initialize choices for menu
 	int selected = 0;
-	auto menuChoices = ftxui::Container::Vertical(
+	auto menu_choices = ftxui::Container::Vertical(
 		{
 		ftxui::MenuEntry("Start Game"),
 		ftxui::MenuEntry("Settings"),
@@ -23,7 +23,7 @@ std::string display_main_menu()
 		}, &selected);
 
 	// Handle user input
-	menuChoices |= ftxui::CatchEvent([&](ftxui::Event event){
+	menu_choices |= ftxui::CatchEvent([&](ftxui::Event event){
 			if (event == ftxui::Event::Special({ 10 }))
 			{
 				screen.ExitLoopClosure()();
@@ -33,14 +33,15 @@ std::string display_main_menu()
 		});
 
 	// Put all components in one container and loop it
-	auto mainMenu = ftxui::Container::Vertical({
+	auto main_menu = ftxui::Container::Vertical({
 		renderer,
-		menuChoices,
+		menu_choices,
 		});
-	screen.Loop(mainMenu);
+
+	screen.Loop(main_menu);
 	switch (selected) {
 	case 0:
-		return "class_select"; // Start game leads to class select
+		return "start_game"; // Start game leads to class select
 	case 1:
 		return "settings";
 	case 2:
@@ -52,7 +53,7 @@ std::string display_main_menu()
 }
 
 // Display player class select menu and return user selection
-std::string display_class_select()
+std::string class_select()
 {
 	auto screen = ftxui::ScreenInteractive::TerminalOutput();
 	screen.Clear();
@@ -61,16 +62,16 @@ std::string display_class_select()
 
 	// Initialize class choices
 	int selected = 0;
-	auto classChoices = ftxui::Container::Vertical(
+	auto class_choices = ftxui::Container::Vertical(
 		{
-		ftxui::MenuEntry("Boatman"),
-		ftxui::MenuEntry("Pardoner"),
-		ftxui::MenuEntry("Game Warden"),
+		ftxui::MenuEntry("Apothecary")	| ftxui::color(ftxui::Color::Cyan3),
+		ftxui::MenuEntry("Laborer")		| ftxui::color(ftxui::Color::Magenta3),
+		ftxui::MenuEntry("Pardoner")	| ftxui::color(ftxui::Color::Gold1),
 		ftxui::MenuEntry("Back")
 		}, &selected);
 
 	// Handle user input
-	classChoices |= ftxui::CatchEvent([&](ftxui::Event event) {
+	class_choices |= ftxui::CatchEvent([&](ftxui::Event event) {
 		if (event == ftxui::Event::Special({ 10 }))
 		{
 			screen.ExitLoopClosure()();
@@ -82,8 +83,9 @@ std::string display_class_select()
 	// Put all components in one container and loop it
 	auto classSelect = ftxui::Container::Vertical({
 		renderer,
-		classChoices,
+		class_choices,
 		});
+
 	screen.Loop(classSelect);
 	switch (selected) {
 	case 0:
@@ -100,11 +102,20 @@ std::string display_class_select()
 
 }
 
-// Display difficult select menu and return user selection
-int display_difficulty_select() 
+// Display difficult select menu and return user selection (maybe?)
+int difficulty_select() 
 {
 	return 0; // TODO
 }
 
 // Display settings menu and handle user input
 // WRITE ME
+
+// Handle the flow between menus
+bool startup_menu_flow() {
+	std::string menu_choice = main_menu();
+	if (menu_choice == "quit") {
+		return false;
+	}
+	return true;
+}
