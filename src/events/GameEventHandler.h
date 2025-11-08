@@ -7,10 +7,16 @@
 // Class to resolve a queue of events in a scene
 class GameEventHandler {
 
-	std::vector<GameEvent> queue;
-
 public:
 	
+	std::vector<GameEvent> queue;
+
+	// Overload == as member function
+	bool operator==(const GameEventHandler& other)
+		const {
+		return	queue == other.queue;
+	}
+
 	void resolve_next();
 
 	void queue_event(GameEvent ev); 

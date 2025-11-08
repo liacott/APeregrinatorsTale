@@ -22,7 +22,6 @@ int main()
 	{
 		return 0; // Terminate program if user selects quit
 	}
-
 	return 0;
 
 }

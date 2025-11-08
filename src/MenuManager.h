@@ -9,7 +9,6 @@
 std::string main_menu()
 {
 	auto screen = ftxui::ScreenInteractive::TerminalOutput();
-	screen.Clear();
 	// Initialize title renderer
 	auto renderer = ftxui::Renderer([] { return ftxui::text("A PEREGRINATOR'S TALE"); });
 	
@@ -56,7 +55,6 @@ std::string main_menu()
 std::string class_select()
 {
 	auto screen = ftxui::ScreenInteractive::TerminalOutput();
-	screen.Clear();
 	// Initialize page label renderer
 	auto renderer = ftxui::Renderer([] { return ftxui::text("CHOOSE A CLASS"); });
 

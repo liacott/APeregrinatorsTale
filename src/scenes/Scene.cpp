@@ -23,3 +23,13 @@ void Scene::remove_entity(int target_entity_id) {
 		}
 	}
 }
+
+// Render visibile entities
+void Scene::display_entities() {
+	// TODO
+}
+
+// Render player interface
+void Scene::display_interface() {
+	// TODO
+}

@@ -15,6 +15,10 @@ std::string Entity::get_name() {
 	return name;
 }
 
+void Entity::set_inspect_status(bool new_status) {
+	inspect_enabled = new_status;
+}
+
 void Entity::set_inspect_text(std::string new_text) {
 	inspect_text = new_text;
 }
@@ -23,10 +27,10 @@ std::string Entity::get_inspect_text() {
 	return inspect_text;
 }
 
-void Entity::enable_inspect() {
-	inspect_enabled = true;
+void Entity::set_visibility(bool new_visibility) {
+	visible = new_visibility;
 }
 
-void Entity::disable_inspect() {
-	inspect_enabled = false;
+bool Entity::get_visibility() {
+	return visible;
 }
