@@ -1,27 +1,35 @@
-﻿#include "MenuManager.h"
-
+﻿#include "scenes/SceneManager.h"
+#include "scenes/SceneState.h"
+#include <ftxui/component/screen_interactive.hpp>
 #include <functional>	// for functionn
 #include <memory>		// for make_shared & shared_ptr
 #include <utility>		// for forward
 #include <iostream>
 
-#include "ftxui/component/component.hpp" // for Components (Menu)
-#include "ftxui/component/component_options.hpp"  // for ButtonOption, CheckboxOption & MenuOption
-#include "ftxui/component/screen_interactive.hpp" // for Element
-
-
 int main()
 {
-	using namespace ftxui;
+	auto screen = ftxui::ScreenInteractive::Fullscreen();
 
-	// If player finishes character creation, game world initializes
+	auto state = std::make_shared<SceneState>();
+	state->current_scene = Scene::MainMenu;
+	state->next_scene = Scene::MainMenu;
 
-	bool load_game = startup_menu_flow();
+	SceneManager manager(state);
 
-	if (!load_game) 
-	{
-		return 0; // Terminate program if user selects quit
-	}
+	// Pointer to active scene component
+	ftxui::Component scene_component = manager.build_scene(state->current_scene, state);
+
+	// Wrap active scene
+	auto renderer = ftxui::Renderer(scene_component, [&]() mutable {
+		// Rebuild scene on change
+		if (state->next_scene != state->current_scene) {
+			state->current_scene = state->next_scene;
+			scene_component = manager.build_scene(state->current_scene, state);
+		}
+		return scene_component->Render();
+	});
+
+	screen.Loop(renderer);
 	return 0;
 
 }

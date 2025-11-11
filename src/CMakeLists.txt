@@ -8,7 +8,7 @@ FetchContent_Declare(ftxui
 FetchContent_MakeAvailable(ftxui)
 
 # Add source to this project's executable.
-add_executable (main "main.cpp"  "MenuManager.h"      "events/GameEvent.h" "events/GameEvent.cpp"   "events/GameEventHandler.cpp" "events/GameEventHandler.h"  "scenes/Scene.cpp"  "scenes/Scene.h" "scenes/MenuScene.cpp" "scenes/MenuScene.h"   "Game.cpp" "Game.h" "GameMap.h" "GameMap.cpp" "Cell.h" "Language.h" "LanguageManager.cpp")
+add_executable (main "main.cpp"        "events/GameEvent.h" "events/GameEvent.cpp"   "events/GameEventHandler.cpp" "events/GameEventHandler.h"    "scenes/SceneState.h"       "scenes/GameMap.h" "scenes/GameMap.cpp" "Cell.h" "languages/Language.h" "languages/LanguageManager.cpp" "scenes/SceneManager.cpp" "scenes/GameView.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET main PROPERTY CXX_STANDARD 20)

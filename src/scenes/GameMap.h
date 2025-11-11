@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "Cell.h"
+#include "../Cell.h"
 
 class GameMap {
 	std::vector<std::vector<Cell>> map_grid;
